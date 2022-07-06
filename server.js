@@ -12,6 +12,12 @@ app.get('/restaurants', (req, res) => {
   res.status(200).json(data);
 });
 
+app.get('/restaurants/:id', (req, res) => {
+  const productId = Number(req.params.id);
+  const result = data.filter((product) => product.id === productId);
+  res.status(200).json(result);
+});
+
 app.listen(port, () => {
   console.log('Your server is listening on port ' + port);
 });
