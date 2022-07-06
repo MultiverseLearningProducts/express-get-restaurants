@@ -22,6 +22,7 @@ app.get('/restaurants/:id', (req, res) => {
 
 //UPDATE ONE BY ID
 app.put('/restaurants/:id', (req, res) => {
+  const newData = req.body;
   const productId = Number(req.params.id);
   let index;
 
@@ -31,7 +32,7 @@ app.put('/restaurants/:id', (req, res) => {
     }
   });
 
-  data[index] = { ...data[index], name: 'New Name' };
+  data[index] = { ...newData };
 
   res.status(200).json(data);
 });
@@ -39,12 +40,7 @@ app.put('/restaurants/:id', (req, res) => {
 //CREATE
 app.post('/restaurants', (req, res) => {
   const id = Math.floor(Math.random() * 1000000000);
-  const newItem = {
-    name: "Jonathan's Pizza",
-    location: 'Chicago',
-    cuisine: 'Fast Food',
-    id,
-  };
+  const newItem = { ...req.body, id };
   data.push(newItem);
   res.status(200).json(data);
 });
