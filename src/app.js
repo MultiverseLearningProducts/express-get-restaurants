@@ -9,4 +9,16 @@ app.get('/restaurants', async (req, res) => {
   res.json(restaurants)
 })
 
+app.get('/restaurants/:id', async (req, res) => {
+  const restaurants = await Restaurant.findAll()
+  const id = req.params.id
+  const restaurant = await Restaurant.findByPk(id)
+
+  if (id >= 1 && id <= restaurants.length) {
+    res.json(restaurant)
+  } else {
+    res.status(404).json({ message: 'Musician not found' });
+  }
+})
+
 module.exports = app;
